@@ -1,17 +1,14 @@
 const express = require('express');
 const Bike = require('../models/bike');
 const auth = require('../middleware/auth');
+const { validate, validateQuery, createBikeSchema, updateBikeSchema, querySchema } = require('../middleware/validate');
 
 const router = express.Router();
 
-router.post('/', auth, async (req, res) => {
+router.post('/', auth, validate(createBikeSchema), async (req, res) => {
   try {
     const { brand, model, year, price, kilometers_driven, location, imageUrl } = req.body;
     
-    if (!brand || !model || !year || !price || !kilometers_driven || !location || !imageUrl) {
-      return res.status(400).json({ message: 'All fields are required' });
-    }
-
     // Generate unique ID for the bike
     const id = `BIKE_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
     
@@ -33,7 +30,7 @@ router.post('/', auth, async (req, res) => {
   }
 });
 
-router.put('/:id', auth, async (req, res) => {
+router.put('/:id', auth, validate(updateBikeSchema), async (req, res) => {
   try {
     const {id} = req.params
     const { brand, model, year, price, kilometers_driven, location, imageUrl } = req.body;
@@ -79,7 +76,7 @@ router.delete('/:id', auth, async (req, res) => {
   }
 });
 
-router.get('/', async (req, res) => {
+router.get('/', validateQuery(querySchema), async (req, res) => {
   try {
     const {brand, model} = req.query
     const bikes = await Bike.find({brand, model});
