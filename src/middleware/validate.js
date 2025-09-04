@@ -60,3 +60,4 @@ module.exports = {
   updateBikeSchema,
   querySchema
 };
+

@@ -76,7 +76,25 @@ router.delete('/:id', auth, async (req, res) => {
   }
 });
 
-router.get('/', validateQuery(querySchema), async (req, res) => {
+router.get('/my-listings', auth, async (req, res) => {
+  try {
+    const bikes = await Bike.find({ sellerId: req.user.sub }).sort({ createdAt: -1 });
+    res.status(200).json(bikes);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+router.get('/', auth, async (req, res) => {
+  try {
+    const bikes = await Bike.find({}).sort({ createdAt: -1 });
+    res.status(200).json(bikes);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+router.get('/search', validateQuery(querySchema), async (req, res) => {
   try {
     const {brand, model} = req.query
     const bikes = await Bike.find({brand, model});

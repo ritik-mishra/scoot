@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 const bikeRouter = require('./routes/bikeRouter');
 const authRouter = require('./routes/authRouter');
+const userRouter = require('./routes/userRouter');
 
 const app = express();
 
@@ -11,6 +12,7 @@ app.use(cors());
 app.use(express.json());
 app.use('/bikes', bikeRouter);
 app.use('/auth', authRouter);
+app.use('/users', userRouter);
 
 app.use('/', (req, res) => {
   res.json({ message: 'base route working' });
