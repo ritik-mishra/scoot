@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Row, Col, Spin, message, Input } from 'antd';
+import { Card, Row, Col, Spin, message, Input, Select } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import Cookies from 'js-cookie';
@@ -78,6 +78,12 @@ const MyListings = () => {
     window.location.reload(); 
   };
 
+  const handlePageChange = (value) => {
+    if (value === 'listings') {
+      navigate('/listings');
+    }
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -92,8 +98,17 @@ const MyListings = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">My Listings</h1>
-              <p className="text-gray-600 text-sm sm:text-base">Manage your bike listings</p>
+              <Select
+                defaultValue="mylistings"
+                size="large"
+                className="w-48"
+                onChange={handlePageChange}
+                options={[
+                  { value: 'listings', label: 'Bike Listings' },
+                  { value: 'mylistings', label: 'My Listings' }
+                ]}
+              />
+              <p className="text-gray-600 text-sm sm:text-base mt-2">Manage your bike listings</p>
             </div>
             
             <div className="flex flex-col sm:flex-row gap-4 items-end sm:items-center">
