@@ -84,6 +84,11 @@ const Edit = () => {
     navigate('/mylistings');
   };
 
+  const handleLogout = () => {
+    document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    window.location.reload(); 
+  };
+
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
       form.submit();
@@ -115,15 +120,23 @@ const Edit = () => {
     <div className="min-h-screen bg-gray-50">
       <div className="bg-white shadow-sm border-b border-gray-200">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <Button 
-            type="text" 
-            icon={<ArrowLeftOutlined />} 
-            onClick={handleBackToMyListings}
-            className="flex items-center text-gray-600 hover:text-gray-800"
-            size="large"
-          >
-            Back to My Listings
-          </Button>
+          <div className="flex justify-between items-center">
+            <Button 
+              type="text" 
+              icon={<ArrowLeftOutlined />} 
+              onClick={handleBackToMyListings}
+              className="flex items-center text-gray-600 hover:text-gray-800"
+              size="large"
+            >
+              Back to My Listings
+            </Button>
+            <button
+              onClick={handleLogout}
+              className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors duration-200 text-sm font-medium"
+            >
+              Logout
+            </button>
+          </div>
         </div>
       </div>
       

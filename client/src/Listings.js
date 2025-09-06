@@ -74,6 +74,11 @@ const Listings = () => {
     navigate(`/details/${bikeId}`);
   };
 
+  const handleLogout = () => {
+    document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    window.location.reload(); 
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -92,18 +97,26 @@ const Listings = () => {
               <p className="text-gray-600 text-sm sm:text-base">Browse available bikes</p>
             </div>
             
-            <div className="w-full sm:w-80">
-              <Search
-                placeholder="Search by brand or model..."
-                allowClear
-                enterButton={<SearchOutlined />}
-                size="large"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                onSearch={handleSearch}
-                onKeyPress={handleKeyPress}
-                className="rounded-lg"
-              />
+            <div className="flex flex-col sm:flex-row gap-4 items-end sm:items-center">
+              <div className="w-full sm:w-80">
+                <Search
+                  placeholder="Search by brand or model..."
+                  allowClear
+                  enterButton={<SearchOutlined />}
+                  size="large"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onSearch={handleSearch}
+                  onKeyPress={handleKeyPress}
+                  className="rounded-lg"
+                />
+              </div>
+              <button
+                onClick={handleLogout}
+                className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors duration-200 text-sm font-medium"
+              >
+                Logout
+              </button>
             </div>
           </div>
         </div>
