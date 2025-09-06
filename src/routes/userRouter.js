@@ -4,7 +4,6 @@ const auth = require('../middleware/auth');
 
 const router = express.Router();
 
-// GET /users/:id - Get user details by ID
 router.get('/:id', auth, async (req, res) => {
   try {
     const { id } = req.params;

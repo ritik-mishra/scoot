@@ -15,27 +15,23 @@ const Login = () => {
       let response;
 
       if (mode === 'login') {
-        // login API
         response = await axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, {
           email: values.email,
           password: values.password,
         });
       } else {
-        // register API
         await axios.post(`${process.env.REACT_APP_API_URL}/auth/register`, {
           name: values.name,
           email: values.email,
           password: values.password,
         });
 
-        // auto login after registration
         response = await axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, {
           email: values.email,
           password: values.password,
         });
       }
 
-      // Store token
       Cookies.set('token', response.data.token, {
         expires: 1,
         secure: process.env.NODE_ENV === 'production',

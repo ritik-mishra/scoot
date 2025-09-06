@@ -26,7 +26,6 @@ const Details = () => {
       });
       setBike(response.data);
       
-      // Fetch seller details
       if (response.data.sellerId) {
         await fetchSellerDetails(response.data.sellerId, token);
       }
@@ -56,7 +55,6 @@ const Details = () => {
       setSeller(response.data);
     } catch (error) {
       console.error('Failed to fetch seller details:', error);
-      // Don't show error to user, just set seller as unknown
       setSeller({ name: 'Unknown Seller' });
     }
   };
@@ -182,22 +180,6 @@ const Details = () => {
 
             <Divider />
 
-            {/* Additional Details */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-gray-800">Additional Information</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <p className="text-gray-500 text-sm">Bike ID</p>
-                  <p className="font-medium text-gray-800">{bike.id}</p>
-                </div>
-                <div>
-                  <p className="text-gray-500 text-sm">Listed On</p>
-                  <p className="font-medium text-gray-800">
-                    {new Date(bike.createdAt).toLocaleDateString()}
-                  </p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>

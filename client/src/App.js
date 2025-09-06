@@ -10,7 +10,6 @@ import 'antd/dist/reset.css';
 
 const HomePage = () => {
   const handleLogout = () => {
-    // Remove token from cookies
     document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
     window.location.reload(); // Reload to trigger redirect
   };

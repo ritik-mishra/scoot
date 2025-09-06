@@ -1,6 +1,5 @@
 const Joi = require('joi');
 
-// Validation schemas
 const createBikeSchema = Joi.object({
   brand: Joi.string().trim().min(1).max(100).required(),
   model: Joi.string().trim().min(1).max(100).required(),
@@ -26,7 +25,6 @@ const querySchema = Joi.object({
   model: Joi.string().trim().min(1).max(100)
 });
 
-// Validation middleware functions
 const validate = (schema) => {
   return (req, res, next) => {
     const { error } = schema.validate(req.body);

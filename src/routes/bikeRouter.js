@@ -9,7 +9,6 @@ router.post('/', auth, validate(createBikeSchema), async (req, res) => {
   try {
     const { brand, model, year, price, kilometers_driven, location, imageUrl } = req.body;
     
-    // Generate unique ID for the bike
     const id = `BIKE_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
     
     const bike = await Bike.create({

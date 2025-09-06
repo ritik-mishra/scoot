@@ -84,7 +84,6 @@ const Listings = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header with Search */}
       <div className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
@@ -110,10 +109,8 @@ const Listings = () => {
         </div>
       </div>
 
-      {/* Content */}
       <div className="p-4 sm:p-6">
         <div className="max-w-7xl mx-auto">
-          {/* Search Results Info */}
           {searchQuery && (
             <div className="mb-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
               <p className="text-blue-800">
